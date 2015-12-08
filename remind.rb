@@ -1,12 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'bundler/setup'
-
 NUMBER_OF_ENTRIES = 2
 RECIPIENT = 'minhajuddin.k@gmail.com'
 
-#command = ARGV[0]
-
+require 'bundler/setup'
 require 'yaml'
 require 'erb'
 require 'pony'
