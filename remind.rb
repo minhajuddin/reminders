@@ -1,11 +1,16 @@
 #!/usr/bin/env ruby
 
+require 'bundler/setup'
+
 NUMBER_OF_ENTRIES = 2
+RECIPIENT = 'minhajuddin.k@gmail.com'
 
 #command = ARGV[0]
 
 require 'yaml'
 require 'erb'
+require 'pony'
+
 data = YAML.load_file('./list.yml')
 tmpl = ERB.new(File.read('./template.erb'))
 
@@ -22,4 +27,12 @@ output = categories.map do |cat|
   [cat, data[cat][offset, NUMBER_OF_ENTRIES]]
 end
 
-puts tmpl.result(binding)
+email_body = tmpl.result(binding)
+
+Pony.mail({
+  :to => RECIPIENT,
+  :via => :sendmail,
+  :from => "reminder@zammu.in",
+  :subject => "Reminders for #{Date.today}",
+  :body => email_body
+})
