@@ -5,8 +5,9 @@ NUMBER_OF_ENTRIES = 2
 #command = ARGV[0]
 
 require 'yaml'
+require 'erb'
 data = YAML.load_file('./list.yml')
-
+tmpl = ERB.new(File.read('./template.erb'))
 
 day_of_year = Date.today.yday
 categories = data.keys
@@ -21,13 +22,4 @@ output = categories.map do |cat|
   [cat, data[cat][offset, NUMBER_OF_ENTRIES]]
 end
 
-puts output.inspect
-
-#category_offsets.
-
-#puts category_offsets[]
-
-#quote_offset = 
-#reminder = day_of_year % data['quotes'].count
-
-#puts data['quotes'].sample(2)
+puts tmpl.result(binding)

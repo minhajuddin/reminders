@@ -1,0 +1,11 @@
+<h1>Reminders</h1>
+<% output.each do |cat, items| %>
+  <h2>
+    <%= cat %>
+  </h2>
+  <% items.each do |item| %>
+    <p>
+      <%= item %>
+    </p>
+  <% end %>
+<% end %>
